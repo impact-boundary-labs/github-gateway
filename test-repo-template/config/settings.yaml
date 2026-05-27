@@ -1,0 +1,4 @@
+preview_settings:
+  name: intent-gateway-preview-test
+  environment: local
+  review_required: true

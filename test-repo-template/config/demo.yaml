@@ -1,0 +1,4 @@
+demo:
+  enabled: true
+  owner: human
+  note: "Gateway demo writes should use direct files under config/."

@@ -1,0 +1,11 @@
+{
+  "operation": "write",
+  "target_repo": "OWNER/REPO",
+  "target_branch": "TARGET_BRANCH",
+  "snapshot_hash": "BRANCH_HEAD_SHA",
+  "file_path": "config/self-hosted-preview-demo.yaml",
+  "source_state": "present",
+  "read_blob_sha": "READ_BLOB_SHA",
+  "agent_message": "Context:\nThis change updates the self-hosted demo config used by the Gateway story flow.\n\nProposed changes:\n- Update the allowed demo configuration file.\n- Keep the change limited to the guarded config path.\n\nSafety note:\nNo known API, auth, migration, or secret-handling changes.",
+  "payload": "BASE64_ENCODED_FILE_CONTENT"
+}

@@ -1,0 +1,7 @@
+data/intent_gateway_pepper
+data/state.db
+data/state.db-*
+data/github-app.pem
+data/github-app-config.json
+secrets/*.pem
+secrets/*.key

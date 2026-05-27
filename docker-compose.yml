@@ -1,0 +1,28 @@
+services:
+  gateway:
+    image: intent-gateway-preview:1.3.2
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:${IGW_HOST_PORT:-18080}:8080"
+    volumes:
+      - ./data:/data
+      - ./docs/public:/docs/public:ro
+      - ./secrets:/secrets:ro
+    environment:
+      INTENT_GATEWAY_PREVIEW_MODE: "1"
+      INTENT_GATEWAY_HTTP_ADDR: "0.0.0.0:8080"
+      INTENT_GATEWAY_DASHBOARD_DOCS_DIR: "/docs/public/githubrepo"
+      IGW_HOST_PORT: "${IGW_HOST_PORT:-18080}"
+      INTENT_GATEWAY_STATE_DB_PATH: "/data/state.db"
+      INTENTCTL_SECRET_PEPPER_FILE: "/data/intent_gateway_pepper"
+      GITHUB_APP_ID: "${GITHUB_APP_ID:-}"
+      GITHUB_APP_PRIVATE_KEY_PATH: "${GITHUB_APP_PRIVATE_KEY_PATH:-}"
+      INTENT_GATEWAY_ALLOWED_REPOS: "${INTENT_GATEWAY_ALLOWED_REPOS:-OWNER/REPO}"
+      ENABLE_WRITE_SET_MATERIALIZATION: "true"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/livez"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

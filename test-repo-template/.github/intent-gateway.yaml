@@ -1,0 +1,6 @@
+mode: guarded
+allowed_paths:
+  - config/*
+blocked_paths:
+  - security/*
+  - .github/*
