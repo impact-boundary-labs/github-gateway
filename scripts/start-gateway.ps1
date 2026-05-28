@@ -1,6 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $PackageRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
+$ComposeProjectName = "github-gateway-self-hosted"
 $ImageName = "github-gateway-self-hosted:1.3.2"
 $ImageTar = Join-Path $PackageRoot "github-gateway-self-hosted.tar"
 $EnvFile = Join-Path $PackageRoot ".env"
@@ -26,6 +27,32 @@ function Read-HostPort($Path) {
         return "18080"
     }
     return $value
+}
+
+function Remove-LegacyComposeContainers($WorkingDir, $CurrentProject) {
+    $ids = @(docker ps -aq --filter "label=com.docker.compose.project.working_dir=$WorkingDir")
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Could not inspect existing Docker containers for this self-hosted folder."
+    }
+    foreach ($id in $ids) {
+        $trimmedID = ($id | Out-String).Trim()
+        if ([string]::IsNullOrWhiteSpace($trimmedID)) {
+            continue
+        }
+        $project = (docker inspect --format '{{ index .Config.Labels "com.docker.compose.project" }}' $trimmedID | Out-String).Trim()
+        if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($project) -or $project -eq $CurrentProject) {
+            continue
+        }
+        $containerName = (docker inspect --format '{{ .Name }}' $trimmedID | Out-String).Trim().Trim("/")
+        if ([string]::IsNullOrWhiteSpace($containerName)) {
+            $containerName = $trimmedID
+        }
+        Write-Host "Removing legacy self-hosted container $containerName..."
+        docker rm -f $trimmedID *> $null
+        if ($LASTEXITCODE -ne 0) {
+            Fail "Could not remove legacy Docker container $containerName."
+        }
+    }
 }
 
 if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {
@@ -67,7 +94,9 @@ if (Test-Path -LiteralPath $ImageTar) {
 
 Push-Location -LiteralPath $PackageRoot
 try {
-    docker compose --env-file .env -f docker-compose.yml up -d
+    docker compose -p $ComposeProjectName --env-file .env -f docker-compose.yml down --remove-orphans *> $null
+    Remove-LegacyComposeContainers $PackageRoot $ComposeProjectName
+    docker compose -p $ComposeProjectName --env-file .env -f docker-compose.yml up -d
     if ($LASTEXITCODE -ne 0) {
         Fail "Docker Compose failed to start the Gateway."
     }
