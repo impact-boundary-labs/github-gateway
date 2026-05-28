@@ -6,10 +6,10 @@ Boundary Labs**.
 ## Public Structure
 
 - [Homepage docs](homepage/01-overview.md): visitor-facing product overview,
-  how the boundary works, security and scope explanation, live preview context,
+  how the boundary works, security and scope explanation, live demo context,
   terminology, and support pages.
 - [GitHub Gateway technical docs](githubrepo/index.md): the public technical
-  documentation for GitHub Gateway Self-hosted 1.3, including setup,
+  documentation for Self-hosted GitHub Gateway v1.3, including setup,
   credentials, policy, intent format, security model, troubleshooting, and
   validation guidance.
 

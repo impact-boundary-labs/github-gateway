@@ -7,11 +7,11 @@ GitHub Gateway reads repository policy from:
 ```
 
 The policy is created by the human repository owner before the demo. After that,
-preview policy should block Gateway/agent writes to `.github/*`.
+test policy should block Gateway/agent writes to `.github/*`.
 
-## Preview Policy Goal
+## Self-hosted Policy Goal
 
-The first preview policy should be small and explicit:
+The first test policy should be small and explicit:
 
 - allow simple config files
 - block sensitive paths
@@ -54,7 +54,7 @@ config/env/prod.yaml
 ```
 
 If you want nested paths, policy must explicitly allow them. Keep the first
-preview test simple and use direct files.
+test simple and use direct files.
 
 ## allowed_paths
 
@@ -83,18 +83,18 @@ Use it for:
 - secrets or credentials
 - areas outside the first demo scope
 
-For the preview, keep `.github/*` blocked after initial human setup. The human
+For Self-hosted GitHub Gateway v1.3, keep `.github/*` blocked after initial human setup. The human
 owner creates `.github/intent-gateway.yaml`; later agent/Gateway writes to that
 area are blocked.
 
 ## Policy Modes
 
-GitHub Gateway Self-hosted 1.3 uses `guarded` as the preview default.
+Self-hosted GitHub Gateway v1.3 uses `guarded` as the default mode.
 
 | Mode | Public meaning |
 | --- | --- |
-| `fast` | Advanced mode for lighter checks. Do not use as the first preview path. |
-| `guarded` | Preview default. Balanced policy, state, and reviewable PR checks. |
+| `fast` | Advanced mode for lighter checks. Do not use as the first self-hosted path. |
+| `guarded` | Self-hosted default. Balanced policy, state, and reviewable PR checks. |
 | `strict` | Advanced mode for stricter workflows. Use only when intentionally configured. |
 
 Do not make `fast` or `strict` central in the first setup flow. Start with
@@ -125,7 +125,7 @@ config/file.yaml
 
 ### Mistake: allowing .github/* for agent writes
 
-Do not allow `.github/*` in the first preview policy. That area controls
+Do not allow `.github/*` in the first test policy. That area controls
 repository automation and policy. Keep it human-owned for initial setup.
 
 ### Mistake: putting secrets under allowed paths

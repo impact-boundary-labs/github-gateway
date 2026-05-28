@@ -24,9 +24,9 @@ It is intended for:
 For the first evaluation, use a test repository. Do not start with production
 repositories or broad repository installations.
 
-## Current Preview Status
+## Current Self-hosted Status
 
-The current public path is **GitHub Gateway Self-hosted 1.3**.
+The current public path is **Self-hosted GitHub Gateway v1.3**.
 
 It runs locally with Docker and provides:
 
@@ -41,9 +41,9 @@ It runs locally with Docker and provides:
 - follow-up updates to the same Gateway-created PR
 - sanitized Dashboard Activity rows
 - compact Guard Result PR bodies
-- story demo for the expected preview flow
+- story demo for the expected self-hosted flow
 
-This is a technical preview. It is not a production release, does not prove
+This self-hosted v1.3 release is not a production release, does not prove
 semantic correctness, and does not auto-merge. Human review remains required.
 
 ## Core Model
@@ -83,7 +83,7 @@ state against GitHub before writing.
 Start here:
 
 - [Quickstart](02-quickstart.md)
-- [Self-hosted preview](03-self-hosted-preview.md)
+- [Self-hosted GitHub Gateway v1.3](03-self-hosted-gateway.md)
 - [GitHub App setup](04-github-app-setup.md)
 - [Runner Key](05-runner-key.md)
 - [Agent instructions](06-agent-instructions.md)

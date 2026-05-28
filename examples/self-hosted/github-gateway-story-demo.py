@@ -41,7 +41,7 @@ os.environ["GATEWAY_URL"] = _normalize_submit_url(
 )
 
 # gateway_cloud is shared with older live-test helpers and still reads
-# GITHUB_TOKEN at import time. The self-hosted preview contract uses the
+# GITHUB_TOKEN at import time. Self-hosted GitHub Gateway v1.3 contract uses the
 # narrower GITHUB_READ_TOKEN name for the agent credential.
 GITHUB_READ_TOKEN = os.environ.get("GITHUB_READ_TOKEN", "").strip()
 if GITHUB_READ_TOKEN and not os.environ.get("GITHUB_TOKEN", "").strip():
@@ -191,7 +191,7 @@ def validate_local_allowlist() -> None:
     if placeholder:
         raise DemoFailure(
             f"INTENT_GATEWAY_ALLOWED_REPOS still looks like OWNER/REPO in {allowlist_path or '.env'}. "
-            "Edit .env in the extracted preview folder, set it to your preview test repository, restart the Gateway, "
+            "Edit .env in the extracted self-hosted folder, set it to your test repository, restart the Gateway, "
             "and do not put this setting in data/agents.env."
         )
     if allowlisted_repo and allowlisted_repo != TARGET_REPO.lower():
@@ -211,7 +211,7 @@ def preflight_policy(owner: str, repo: str, base_head: str) -> None:
     if not good_allowed:
         raise DemoFailure(
             f"demo path {DEMO_FILE_PATH} is not allowed by the repo policy; "
-            "for the preview config/* policy, use a direct file such as "
+            "for Self-hosted GitHub Gateway v1.3 config/* policy, use a direct file such as "
             "config/live-demo-pass-<timestamp>.yaml, not a nested path such as "
             "config/demo/file.yaml"
         )

@@ -1,6 +1,6 @@
 # Start Here
 
-The **GitHub Gateway Self-hosted preview** is a local Gateway that separates
+The **Self-hosted GitHub Gateway v1.3** is a local Gateway that separates
 agent read access from repository write impact.
 
 Core idea:
@@ -9,11 +9,11 @@ Core idea:
 > through the Gateway.
 
 Without that split, an agent often ends up holding GitHub write credentials and
-can create repository impact directly. This preview shows a different model:
+can create repository impact directly. Self-hosted GitHub Gateway v1.3 shows a different model:
 the agent reads GitHub, submits structured intent to the Gateway, and only
 admitted intent becomes a **reviewable pull request**.
 
-This preview is intended for test repositories and controlled evaluation before
+Self-hosted GitHub Gateway v1.3 is intended for test repositories and controlled evaluation before
 production use.
 
 ## What Problem It Solves
@@ -30,7 +30,7 @@ access for the agent**.
 ## What You Need
 
 - Docker Desktop running locally
-- the extracted preview folder
+- the extracted self-hosted folder
 - a browser for the local dashboard
 - a GitHub account or organization
 - a small GitHub test repository
@@ -59,13 +59,13 @@ It gives you a matching demo policy and predictable allowed/blocked paths.
 
 Quick path in this repository:
 
-- `preview/user-guide/setup.md`
-- `preview/user-guide/security-model.md`
-- `preview/user-guide/run-demo.md`
-- `preview/user-guide/troubleshooting.md`
-- `preview/user-guide/agent-cheatsheet.md`
+- `user-guide/setup.md`
+- `user-guide/security-model.md`
+- `user-guide/run-demo.md`
+- `user-guide/troubleshooting.md`
+- `user-guide/agent-cheatsheet.md`
 
-Quick path in the extracted preview ZIP:
+Quick path in the extracted self-hosted ZIP:
 
 - `user-guide/setup.md`
 - `user-guide/security-model.md`

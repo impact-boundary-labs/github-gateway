@@ -1,6 +1,6 @@
-# GitHub Gateway Self-hosted 1.3
+# Self-hosted GitHub Gateway v1.3
 
-GitHub Gateway Self-hosted 1.3 is the current public preview path for GitHub
+Self-hosted GitHub Gateway v1.3 is the current public path for GitHub
 Gateway by Impact Boundary Labs.
 
 It runs locally in Docker. The Gateway process owns the GitHub App write
@@ -10,7 +10,7 @@ GitHub, a local checkout, or helper tooling.
 
 ## What Stays Local
 
-In the self-hosted preview:
+In Self-hosted GitHub Gateway v1.3:
 
 - the GitHub App private key stays on the user's machine
 - `state.db` stays on the user's machine
@@ -19,20 +19,20 @@ In the self-hosted preview:
 - the Gateway does not send telemetry
 - GitHub API calls go to GitHub through the configured GitHub App
 
-The preview dashboard may link to public docs or feedback channels, but the
+The dashboard may link to public docs or feedback channels, but the
 Gateway runtime does not collect prompts, repository payloads, tokens, or usage
 analytics.
 
 Website analytics, if used on a public marketing site, are separate from
 Gateway runtime telemetry and should be documented separately.
 
-## Preview Package Shape
+## Self-hosted Package Shape
 
-The source-free preview package contains the runtime image and local helper
+The source-free self-hosted package contains the runtime image and local helper
 files:
 
 ```text
-intent-gateway-preview.tar
+github-gateway-self-hosted.tar
 docker-compose.yml
 .env
 README.md
@@ -95,7 +95,7 @@ The agent needs:
 
 The Gateway validates claimed repository state against GitHub before writing.
 
-## Preview Defaults
+## Self-hosted Defaults
 
 Default dashboard URL:
 
@@ -103,7 +103,7 @@ Default dashboard URL:
 http://localhost:18080/dashboard
 ```
 
-Default preview allowlist placeholder:
+Default allowlist placeholder:
 
 ```text
 INTENT_GATEWAY_ALLOWED_REPOS=OWNER/REPO

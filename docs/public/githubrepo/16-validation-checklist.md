@@ -1,7 +1,7 @@
 # Validation Checklist
 
-This page is a public validation checklist for GitHub Gateway Self-hosted 1.3.
-Use it to record or review a completed preview smoke run without exposing
+This page is a public validation checklist for Self-hosted GitHub Gateway v1.3.
+Use it to record or review a completed self-hosted smoke run without exposing
 private data.
 
 It intentionally does not publish private PR URLs, private repository names,
@@ -12,7 +12,7 @@ or internal test matrices.
 
 Check these behaviors on a test repository:
 
-- source-free preview ZIP starts with Docker
+- source-free self-hosted ZIP starts with Docker
 - `/livez` reports HTTP liveness
 - dashboard loads locally
 - GitHub App write identity can be configured
@@ -69,9 +69,9 @@ PR bodies should not publish:
 
 ## Source-Free ZIP Smoke
 
-The source-free preview package should include:
+The source-free self-hosted package should include:
 
-- `intent-gateway-preview.tar`
+- `github-gateway-self-hosted.tar`
 - `docker-compose.yml`
 - `.env`
 - `README.md`
@@ -97,10 +97,9 @@ It should not include:
 
 ## Public Status Framing
 
-GitHub Gateway Self-hosted 1.3 is a technical preview. Passing the preview smoke
-and story demo means the flow worked in that environment. It does not prove
-semantic correctness, future production suitability, or that a PR should be
-merged.
+Passing the Self-hosted GitHub Gateway v1.3 smoke and story demo means the flow
+worked in that environment. It does not prove semantic correctness, future
+production suitability, or that a PR should be merged.
 
 Human review remains required.
 

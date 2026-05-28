@@ -1,14 +1,15 @@
 # Limitations
 
-This page lists known limitations for GitHub Gateway Self-hosted 1.3.
+This page lists known limitations for Self-hosted GitHub Gateway v1.3.
 
-The preview is useful for evaluating the write-boundary model on test
+Self-hosted GitHub Gateway v1.3 is useful for evaluating the write-boundary model on test
 repositories. It is not a guarantee about future hosted product behavior,
 arbitrary repositories, or semantic correctness.
 
-## Preview Scope
+## Self-hosted Scope
 
-GitHub Gateway Self-hosted 1.3 is a technical preview.
+Self-hosted GitHub Gateway v1.3 is a controlled self-hosted release for
+evaluating the write-boundary model.
 
 Use it first with:
 
@@ -21,12 +22,12 @@ Use it first with:
 Do not use it as a first step on broad repository sets or high-risk production
 repositories.
 
-## Preview Setup
+## Self-hosted Setup
 
-Docker Desktop is required for the self-hosted preview.
+Docker Desktop is required for Self-hosted GitHub Gateway v1.3.
 
-The current self-hosted preview recommends dashboard manifest setup first, with
-manual PEM wiring as fallback.
+The current setup recommends dashboard manifest setup first, with manual PEM
+wiring as fallback.
 
 - create or configure a GitHub App
 - store the private key locally for the Gateway
@@ -36,7 +37,7 @@ manual PEM wiring as fallback.
 
 ## Intent Protocol
 
-The preview uses structured JSON intents.
+Self-hosted GitHub Gateway v1.3 uses structured JSON intents.
 
 Limitations:
 
@@ -65,7 +66,7 @@ It does not mean the change is correct or should be merged.
 
 ## Repository Scope
 
-The first preview flow is designed for small, reviewable repository changes.
+The first Self-hosted GitHub Gateway v1.3 run flow is designed for small, reviewable repository changes.
 
 It is not intended for:
 
@@ -122,7 +123,7 @@ telemetry and should be disclosed separately.
 
 Now:
 
-- GitHub Gateway Self-hosted 1.3
+- Self-hosted GitHub Gateway v1.3
 - Runner Key
 - Guarded PR creation
 - same-effect PR reuse

@@ -1,22 +1,22 @@
 # Setup
 
-This is the short path for the **GitHub Gateway Self-hosted preview**.
+This is the short path for the **Self-hosted GitHub Gateway v1.3**.
 
 Detailed reference:
 
 - `docs/public/githubrepo/04-github-app-setup.md`
 - `docs/public/githubrepo/02-quickstart.md`
 
-## 1. Unzip The Preview
+## 1. Unzip The Self-hosted Package
 
-Extract the preview ZIP into a normal local folder.
+Extract the self-hosted ZIP into a normal local folder.
 
 You should see at least:
 
 ```text
 docker-compose.yml
 .env
-Start Intent Gateway.cmd
+Start GitHub Gateway.cmd
 docs/
 user-guide/
 test-repo-template/
@@ -27,13 +27,13 @@ test-repo-template/
 On Windows, double-click:
 
 ```text
-Start Intent Gateway.cmd
+Start GitHub Gateway.cmd
 ```
 
 Or run manually:
 
 ```powershell
-docker load -i intent-gateway-preview.tar
+docker load -i github-gateway-self-hosted.tar
 docker compose --env-file .env -f docker-compose.yml up -d
 ```
 
@@ -46,10 +46,10 @@ http://localhost:18080/dashboard
 The first visit opens **Getting started** in light mode by default.
 
 Some runtime files and environment variables still use the `intent-gateway` /
-`INTENT_GATEWAY_*` prefix for preview compatibility. The public product name is
+`INTENT_GATEWAY_*` prefix for runtime compatibility. The public product name is
 GitHub Gateway by Impact Boundary Labs.
 
-Before you run the demo, open `.env` in the extracted preview folder
+Before you run the demo, open `.env` in the extracted self-hosted folder
 and set:
 
 ```dotenv
@@ -83,7 +83,7 @@ After GitHub creates the app:
 
 1. open the installation page
 2. choose **Only selected repositories**
-3. select only your preview test repository
+3. select only your test repository
 4. save the installation
 5. use **Refresh now** in the dashboard
 
@@ -121,7 +121,7 @@ Use:
 
 - Resource owner: your account or organization
 - Repository access: **Only selected repositories**
-- Repository: your preview test repository
+- Repository: your test repository
 - Permissions:
   - Contents: read-only
   - Pull requests: read-only
@@ -138,18 +138,18 @@ The dashboard can write or update `data/agents.env` after Runner Key creation.
 That file is local runtime state. It may contain a plaintext Runner Key. Do not
 share or commit it.
 
-The preview package already includes a placeholder `data/agents.env` file. The
+The self-hosted package already includes a placeholder `data/agents.env` file. The
 dashboard can fill in the Runner Key and repo values there after creation.
 
 ## 7. Run The Demo
 
 Once the GitHub App, Runner Key, and GitHub Read Token are ready, continue with:
 
-- `preview/user-guide/run-demo.md`
+- `user-guide/run-demo.md`
 
 Before that, read:
 
-- `preview/user-guide/security-model.md`
+- `user-guide/security-model.md`
 
 That is the shortest explanation of why these three credentials are kept
 separate.

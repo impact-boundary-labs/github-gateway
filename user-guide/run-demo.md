@@ -1,6 +1,6 @@
 # Run Demo
 
-This is the short path for the preview demo flow.
+This is the short path for the self-hosted demo flow.
 
 Detailed reference:
 
@@ -29,9 +29,9 @@ If `.env` still contains `OWNER/REPO`, the dashboard and demo stay in a
 partial state and the story demo will fail with `repo_allowlist`. This value
 belongs in `.env`, not in `data/agents.env`.
 
-## 2. Know The Preview Policy
+## 2. Know The Test Policy
 
-Bundled preview examples:
+Bundled self-hosted examples:
 
 - allowed path:
 
@@ -82,7 +82,7 @@ port.
 
 ## 4. Run The Story Demo
 
-From the extracted preview folder:
+From the extracted self-hosted folder:
 
 ```powershell
 python examples/self-hosted/github-gateway-story-demo.py

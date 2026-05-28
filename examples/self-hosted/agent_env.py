@@ -73,7 +73,6 @@ def allowlist_env_candidates(script_path: str) -> list[Path]:
             script_root / ".env.self-hosted.example",
             Path.cwd() / ".env.example",
             script_root / ".env.example",
-            script_root / "preview" / ".env.example",
         ]
     )
     return unique_paths(candidates)

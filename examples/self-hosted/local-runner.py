@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Small local runner for submitting a prepared intent to Intent Gateway.
+"""Small local runner for submitting a prepared intent to GitHub Gateway.
 
 This runner is intentionally thin: it reads one JSON intent file, sends it to
 the existing submit endpoint, and prints only safe decision fields. It does not
@@ -62,7 +62,7 @@ def redact(text: object, api_key: str = "") -> str:
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Submit a prepared intent JSON file to a local self-hosted Intent Gateway.",
+        description="Submit a prepared intent JSON file to a local Self-hosted GitHub Gateway v1.3.",
     )
     parser.add_argument("intent_file", help="Path to the intent JSON file to submit.")
     parser.add_argument(

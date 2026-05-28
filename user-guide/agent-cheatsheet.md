@@ -1,6 +1,6 @@
 # Agent Cheatsheet
 
-Short agent-facing summary for the **GitHub Gateway Self-hosted preview**.
+Short agent-facing summary for **Self-hosted GitHub Gateway v1.3**.
 
 Detailed reference:
 
@@ -22,7 +22,7 @@ Submit intents to the Gateway with:
 INTENT_GATEWAY_API_KEY
 ```
 
-Target the configured preview repository with:
+Target the configured repository with:
 
 ```text
 TEST_REPO

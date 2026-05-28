@@ -5,16 +5,16 @@ Labs**.
 
 Public technical documentation lives here:
 
-- [GitHub Gateway docs](01-overview.md): product documentation for GitHub
-  Gateway Self-hosted 1.3, including setup, credentials, policy, intents, Guard
+- [GitHub Gateway docs](01-overview.md): product documentation for
+  Self-hosted GitHub Gateway v1.3, including setup, credentials, policy, intents, Guard
   Results, security model, limitations, troubleshooting, and validation
   guidance.
 
 ## Current Public Path
 
-GitHub Gateway Self-hosted 1.3 is the current technical preview. It is a local
-Gateway for evaluating controlled repository impact from coding agents on a test
-repository.
+Self-hosted GitHub Gateway v1.3 is the current public path. It is a local
+Gateway for evaluating controlled repository impact from coding agents on a
+test repository.
 
 The core public message is:
 
@@ -28,7 +28,7 @@ happen through the configured GitHub App after admission.
 
 ## Documentation Boundaries
 
-Use `docs/public/githubrepo/` as the public preview contract.
+Use `docs/public/githubrepo/` as the Self-hosted GitHub Gateway v1.3 contract.
 
 Older or deeper documents outside `docs/public/githubrepo/` may contain internal notes,
 working names, implementation details, or historical context. They are not the

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Small Cloud/HTTP helper for Intent Gateway live tests.
+"""Small Cloud/HTTP helper for GitHub Gateway live tests.
 
 This file is intentionally independent of the old CLI/Docker harness.
 It sends exactly the JSON a test gives it. It does not inject request_id,

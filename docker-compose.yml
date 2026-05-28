@@ -1,6 +1,6 @@
 services:
   gateway:
-    image: intent-gateway-preview:1.3.2
+    image: github-gateway-self-hosted:1.3.2
     restart: unless-stopped
     init: true
     ports:
@@ -10,7 +10,7 @@ services:
       - ./docs/public:/docs/public:ro
       - ./secrets:/secrets:ro
     environment:
-      INTENT_GATEWAY_PREVIEW_MODE: "1"
+      INTENT_GATEWAY_SELF_HOSTED_MODE: "1"
       INTENT_GATEWAY_HTTP_ADDR: "0.0.0.0:8080"
       INTENT_GATEWAY_DASHBOARD_DOCS_DIR: "/docs/public/githubrepo"
       IGW_HOST_PORT: "${IGW_HOST_PORT:-18080}"

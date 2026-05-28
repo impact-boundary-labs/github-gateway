@@ -1,6 +1,6 @@
-# Preview Policy Explained
+# Self-hosted Policy Explained
 
-The preview test repository uses this policy:
+The test repository uses this policy:
 
 ```yaml
 mode: guarded
@@ -27,7 +27,7 @@ intents.
 
 ```text
 config/live-demo-pass.yaml
-config/self-hosted-preview-demo.yaml
+config/self-hosted-gateway-demo.yaml
 config/gateway-load-test-20260520T091206Z-001.yaml
 ```
 
@@ -52,12 +52,12 @@ This means agents cannot modify the policy file through the Gateway after the
 human owner has created it. Nested `.github/...` paths, such as workflow files,
 are still denied because they are outside the allowed `config/*` scope.
 
-These areas are blocked so the preview does not casually mutate security
+These areas are blocked so Self-hosted GitHub Gateway v1.3 does not casually mutate security
 configuration, workflow configuration, or the policy file through the Gateway.
 
 ## Direct Path Semantics
 
-In this preview policy, `config/*` allows direct files under `config/`. It does
+In this test policy, `config/*` allows direct files under `config/`. It does
 not allow nested paths such as:
 
 ```text

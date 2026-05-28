@@ -1,6 +1,6 @@
 # Quickstart
 
-This quickstart walks through a first self-hosted preview run from a source-free
+This quickstart walks through a first Self-hosted GitHub Gateway v1.3 run from a source-free
 ZIP package.
 
 Use a test repository first. The first goal is not to merge code. The first
@@ -13,7 +13,7 @@ repository changes.
 - a GitHub account or organization where you can create or install a GitHub App
 - a test repository
 - access to create a fine-grained read-only GitHub token for the agent
-- the GitHub Gateway Self-hosted 1.3 ZIP package
+- Self-hosted GitHub Gateway v1.3 ZIP package
 
 The default local URL is:
 
@@ -25,17 +25,17 @@ If you change the host port, use that same port for `INTENT_GATEWAY_URL` in the
 agent environment.
 
 Some runtime files and environment variables still use the `intent-gateway` /
-`INTENT_GATEWAY_*` prefix for preview compatibility. The public product name is
+`INTENT_GATEWAY_*` prefix for runtime compatibility. The public product name is
 GitHub Gateway by Impact Boundary Labs.
 
-## 1. Unzip The Preview
+## 1. Unzip The Self-hosted Package
 
-Unzip the preview package into a local folder.
+Unzip the self-hosted package into a local folder.
 
 The extracted folder should contain files and folders similar to:
 
 ```text
-intent-gateway-preview.tar
+github-gateway-self-hosted.tar
 docker-compose.yml
 .env
 README.md
@@ -56,7 +56,7 @@ GitHub App private key fallback. Do not commit either folder.
 
 ## 2. Configure The Target Repository
 
-Set the repository allowlist in the preview `.env` file:
+Set the repository allowlist in the Self-hosted GitHub Gateway v1.3 `.env` file:
 
 ```dotenv
 INTENT_GATEWAY_ALLOWED_REPOS=OWNER/REPO
@@ -67,17 +67,17 @@ Use the repository where you will install the GitHub App and run the story demo.
 Do not put `INTENT_GATEWAY_ALLOWED_REPOS` in `data/agents.env`. That setting
 belongs to the Gateway process, not the agent.
 
-If the preview still contains `OWNER/REPO`, the demo should stop before
+If the self-hosted package still contains `OWNER/REPO`, the demo should stop before
 submitting changes.
 
 ## 3. Start The Gateway
 
-On Windows, use the start helper included in the preview folder.
+On Windows, use the start helper included in the self-hosted folder.
 
-Or run from the extracted preview folder:
+Or run from the extracted self-hosted folder:
 
 ```powershell
-docker load -i .\intent-gateway-preview.tar
+docker load -i .\github-gateway-self-hosted.tar
 docker compose --env-file .env -f docker-compose.yml up -d
 ```
 
@@ -135,7 +135,7 @@ Then select:
 OWNER/REPO
 ```
 
-Do not install the preview app on all repositories for the first run.
+Do not install GitHub App on all repositories for the first run.
 
 After saving in GitHub, wait briefly and use **Refresh now** in the dashboard.
 Repository installation checks can take a moment after GitHub changes.
@@ -157,7 +157,7 @@ The Runner Key:
 - does not bypass policy
 - is shown only once
 
-The preview dashboard can write or update:
+The dashboard can write or update:
 
 ```text
 data/agents.env
@@ -217,7 +217,7 @@ write credentials before using the environment as an isolated agent demo.
 
 ## 9. Use The Test Repo Template
 
-The preview includes a test repo template under:
+Self-hosted GitHub Gateway v1.3 includes a test repo template under:
 
 ```text
 test-repo-template/
@@ -236,7 +236,7 @@ writes to `.github/*` should be blocked by policy.
 
 ## 10. Run The Story Demo
 
-From the extracted preview folder:
+From the extracted self-hosted folder:
 
 ```powershell
 python examples/self-hosted/github-gateway-story-demo.py
@@ -272,7 +272,7 @@ completed, and Conflict.
 
 ## Stop The Gateway
 
-Use the stop helper included in the preview folder.
+Use the stop helper included in the self-hosted folder.
 
 Or:
 

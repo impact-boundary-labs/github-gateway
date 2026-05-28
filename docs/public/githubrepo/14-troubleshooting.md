@@ -1,6 +1,6 @@
 # Troubleshooting
 
-This page covers common first-run issues in GitHub Gateway Self-hosted 1.3.
+This page covers common first-run issues in Self-hosted GitHub Gateway v1.3.
 
 Start with the dashboard status column and the Activity log. The Activity log is
 especially useful after a demo run because it shows sanitized Gateway decisions
@@ -22,7 +22,7 @@ Fix:
 
 1. Start Docker Desktop.
 2. Wait until Docker reports it is running.
-3. Start the preview again.
+3. Start Self-hosted GitHub Gateway v1.3 again.
 
 ## Port 18080 Occupied
 
@@ -39,7 +39,7 @@ Likely cause:
 Fix:
 
 1. Stop the other process, or choose another host port.
-2. If using a custom host port, set the preview port override.
+2. If using a custom host port, set the self-hosted port override.
 3. Use the same port in `INTENT_GATEWAY_URL`.
 
 Example:
@@ -90,7 +90,7 @@ Manual setup should use the container path:
 GITHUB_APP_PRIVATE_KEY_PATH=/secrets/github-app.pem
 ```
 
-Place the actual file in the preview's `secrets/` folder as expected by the
+Place the actual file in Self-hosted GitHub Gateway v1.3's `secrets/` folder as expected by the
 package. Do not paste PEM contents into docs, chat, logs, or issues.
 
 ## GitHub App Not Installed On Repository

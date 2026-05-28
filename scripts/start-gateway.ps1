@@ -1,11 +1,11 @@
 $ErrorActionPreference = "Stop"
 
-$PreviewRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
-$ImageName = "intent-gateway-preview:1.3.2"
-$ImageTar = Join-Path $PreviewRoot "intent-gateway-preview.tar"
-$EnvFile = Join-Path $PreviewRoot ".env"
-$EnvExampleFile = Join-Path $PreviewRoot ".env.example"
-$ComposeFile = Join-Path $PreviewRoot "docker-compose.yml"
+$PackageRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
+$ImageName = "github-gateway-self-hosted:1.3.2"
+$ImageTar = Join-Path $PackageRoot "github-gateway-self-hosted.tar"
+$EnvFile = Join-Path $PackageRoot ".env"
+$EnvExampleFile = Join-Path $PackageRoot ".env.example"
+$ComposeFile = Join-Path $PackageRoot "docker-compose.yml"
 
 function Fail($Message) {
     Write-Host ""
@@ -41,18 +41,18 @@ if (-not (Test-Path -LiteralPath $EnvFile)) {
     if (Test-Path -LiteralPath $EnvExampleFile) {
         Copy-Item -LiteralPath $EnvExampleFile -Destination $EnvFile -Force
     } else {
-        Fail ".env is missing from the preview folder."
+        Fail ".env is missing from the self-hosted folder."
     }
 }
 if (-not (Test-Path -LiteralPath $ComposeFile)) {
-    Fail "docker-compose.yml is missing from the preview folder."
+    Fail "docker-compose.yml is missing from the self-hosted folder."
 }
 
-New-Item -ItemType Directory -Force -Path (Join-Path $PreviewRoot "data") | Out-Null
-New-Item -ItemType Directory -Force -Path (Join-Path $PreviewRoot "secrets") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $PackageRoot "data") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $PackageRoot "secrets") | Out-Null
 
 if (Test-Path -LiteralPath $ImageTar) {
-    Write-Host "Loading bundled preview image..."
+    Write-Host "Loading bundled self-hosted image..."
     docker load -i $ImageTar
     if ($LASTEXITCODE -ne 0) {
         Fail "Docker image load failed."
@@ -61,11 +61,11 @@ if (Test-Path -LiteralPath $ImageTar) {
     Write-Host "No bundled image tar found; using local image tag." -ForegroundColor Yellow
     docker image inspect $ImageName *> $null
     if ($LASTEXITCODE -ne 0) {
-        Fail "Docker image $ImageName is not loaded and intent-gateway-preview.tar was not found."
+        Fail "Docker image $ImageName is not loaded and github-gateway-self-hosted.tar was not found."
     }
 }
 
-Push-Location -LiteralPath $PreviewRoot
+Push-Location -LiteralPath $PackageRoot
 try {
     docker compose --env-file .env -f docker-compose.yml up -d
     if ($LASTEXITCODE -ne 0) {
@@ -78,7 +78,7 @@ try {
 $port = Read-HostPort $EnvFile
 $dashboardURL = "http://localhost:$port/dashboard"
 Write-Host ""
-Write-Host "GitHub Gateway preview is starting."
+Write-Host "Self-hosted GitHub Gateway v1.3 is starting."
 Write-Host "Dashboard: $dashboardURL"
 Write-Host ""
 Write-Host "If setup is incomplete, use the dashboard to create a GitHub App from template or use manual PEM setup."

@@ -44,7 +44,7 @@ With GitHub Gateway:
 The GitHub App private key belongs to the Gateway.
 
 It lets the Gateway create branches and pull requests after admission. It should
-be stored locally in the preview data or secrets path, depending on the setup
+be stored locally in the self-hosted data or secrets path, depending on the setup
 flow.
 
 Never give this key to the agent. If the agent has the GitHub App private key,
@@ -153,7 +153,7 @@ materializing impact.
 
 ## Runtime Data Boundaries
 
-GitHub Gateway Self-hosted 1.3 runs locally.
+Self-hosted GitHub Gateway v1.3 runs locally.
 
 Local runtime state may include:
 

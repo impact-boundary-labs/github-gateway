@@ -18,10 +18,10 @@ update reviewable pull requests.
 Never give the GitHub App private key to the agent. If the agent has the
 private key, the write boundary is broken.
 
-## Recommended Preview Flow
+## Recommended Self-hosted Flow
 
-For GitHub Gateway Self-hosted 1.3, the recommended setup path starts in the
-preview dashboard.
+For Self-hosted GitHub Gateway v1.3, the recommended setup path starts in the
+dashboard.
 
 The public setup contract is:
 
@@ -32,7 +32,7 @@ The public setup contract is:
 5. Install the app only on the selected test repository.
 6. Create a Runner Key for the agent after repository installation is ready.
 
-In the current self-hosted preview, the dashboard manifest flow is the
+For Self-hosted GitHub Gateway v1.3, the dashboard manifest flow is the
 recommended operator path. Manual setup remains the fallback when you already
 have a GitHub App or you want to wire the PEM yourself.
 
@@ -71,25 +71,29 @@ For an organization:
 3. Open GitHub Apps.
 4. Create a new GitHub App for that organization.
 
-Use a clear local-preview name such as:
+Use a clear self-hosted app name such as:
 
 ```text
-GitHub Gateway Local Preview
+Impact Boundary Gateway v1.3
 ```
 
+GitHub App names cannot start with `GitHub`, so the app name uses the Impact
+Boundary Labs brand while the product remains GitHub Gateway by Impact Boundary
+Labs.
+
 Use a local dashboard URL for homepage, callback, or setup fields if your
-preview asks for them:
+self-hosted setup asks for them:
 
 ```text
 http://localhost:18080/dashboard
 ```
 
-Do not enable webhooks unless your specific preview package explicitly requires
+Do not enable webhooks unless your specific self-hosted package explicitly requires
 them.
 
 ## Required Repository Permissions
 
-Use the narrowest permissions needed for the preview:
+Use the narrowest permissions needed for Self-hosted GitHub Gateway v1.3:
 
 | Permission | Access | Why |
 | --- | --- | --- |
@@ -106,7 +110,7 @@ for the first evaluation.
 
 The private key belongs to the Gateway.
 
-Manual preview setup commonly uses:
+Manual self-hosted setup commonly uses:
 
 ```text
 secrets/github-app.pem
@@ -157,7 +161,7 @@ For an organization:
 7. Select `OWNER/REPO`.
 8. Save.
 
-Do not install the preview app on all repositories for the first run.
+Do not install GitHub App on all repositories for the first run.
 
 GitHub installation state can take a short time to propagate. In the dashboard,
 use **Refresh now** after changing installation or permissions.
@@ -172,12 +176,12 @@ use **Refresh now** after changing installation or permissions.
 | Authentication fails | App ID and PEM do not belong to the same app. | Use the matching App ID/private key pair. |
 | Repository installation not found | App is not installed on the target repo or allowlist is wrong. | Install the app on `OWNER/REPO` and set `INTENT_GATEWAY_ALLOWED_REPOS=OWNER/REPO`. |
 
-## Preview Notes
+## Self-hosted Notes
 
 - The GitHub App private key stays local to the Gateway.
 - The agent never receives the PEM.
 - Install the app on the test repository only, not on all repositories.
 - Use **Refresh now** in the dashboard after GitHub installation or permission
   changes.
-- The self-hosted preview does not imply a hosted or cloud path is currently
+- Self-hosted GitHub Gateway v1.3 does not imply a hosted or cloud path is currently
   available.

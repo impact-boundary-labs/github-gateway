@@ -1,7 +1,7 @@
-# GitHub Gateway Self-hosted 1.3 Preview
+# Self-hosted GitHub Gateway v1.3
 
-This folder is the source-free preview package layout for the first self-hosted
-preview of the **GitHub Gateway** reference adapter.
+This folder is the source-free distribution layout for **Self-hosted GitHub
+Gateway v1.3**.
 
 The broader product idea is the **Impact Boundary Core**:
 
@@ -10,7 +10,7 @@ Intent -> Admission -> Impact
 ```
 
 Agents may read repository state and propose changes. Repository impact goes
-through the Gateway. Use this `preview/` folder for user distribution. The
+through the Gateway. This folder defines the user distribution layout. The
 repository-root Compose files are for development or source-build workflows.
 
 No secrets are included in the ZIP.
@@ -31,12 +31,12 @@ Detailed reference:
 - `docs/public/index.md`
 - `docs/public/githubrepo/01-overview.md`
 - `docs/public/githubrepo/02-quickstart.md`
-- `docs/public/githubrepo/03-self-hosted-preview.md`
+- `docs/public/githubrepo/03-self-hosted-gateway.md`
 - `docs/public/githubrepo/04-github-app-setup.md`
 - `docs/public/githubrepo/06-agent-instructions.md`
 - `docs/public/githubrepo/12-security-model.md`
 
-## Preview Docs
+## Self-hosted Docs
 
 - Public docs index: `docs/public/index.md`
 - Public homepage docs: `docs/public/homepage/`
@@ -52,14 +52,14 @@ Detailed reference:
 ## Start On Windows
 
 1. Install and start Docker Desktop.
-2. Unzip the preview folder.
+2. Unzip the self-hosted folder.
 3. Double-click:
 
 ```text
-Start Intent Gateway.cmd
+Start GitHub Gateway.cmd
 ```
 
-The launcher loads the bundled `intent-gateway-preview.tar` when it is present,
+The launcher loads the bundled `github-gateway-self-hosted.tar` when it is present,
 starts Docker Compose, and opens:
 
 ```text
@@ -70,10 +70,10 @@ The first dashboard visit opens **Getting started** in light mode by default.
 If you later switch theme, the dashboard keeps that browser preference locally.
 
 Some runtime files and environment variables still use the `intent-gateway` /
-`INTENT_GATEWAY_*` prefix for preview compatibility. The public product name is
+`INTENT_GATEWAY_*` prefix for runtime compatibility. The public product name is
 GitHub Gateway by Impact Boundary Labs.
 
-Before you run the demo, edit `.env` in the extracted preview folder
+Before you run the demo, edit `.env` in the extracted self-hosted folder
 and set:
 
 ```dotenv
@@ -100,7 +100,7 @@ Runner Keys, `state.db`, the pepper file, or repository data. A complete manual
 `GITHUB_APP_ID` + `GITHUB_APP_PRIVATE_KEY_PATH` fallback remains available.
 
 Manual setup remains available. The `secrets/` folder is intentionally empty in
-the preview ZIP unless you use this fallback. If you already have a GitHub App,
+the self-hosted ZIP unless you use this fallback. If you already have a GitHub App,
 put the PEM at:
 
 ```text
@@ -116,10 +116,10 @@ GITHUB_APP_PRIVATE_KEY_PATH=/secrets/github-app.pem
 
 ## Manual Start
 
-Load the preview image:
+Load Self-hosted GitHub Gateway v1.3 image:
 
 ```powershell
-docker load -i intent-gateway-preview.tar
+docker load -i github-gateway-self-hosted.tar
 ```
 
 Start the Gateway:
@@ -134,7 +134,7 @@ Open the local dashboard:
 http://localhost:18080/dashboard
 ```
 
-After creating a Runner Key, give the agent the public preview instructions from
+After creating a Runner Key, give the agent Self-hosted GitHub Gateway v1.3 instructions from
 `docs/public/githubrepo/06-agent-instructions.md`. The agent needs the
 Gateway URL, Runner Key, and a repository-scoped GitHub read token. Do not give
 the agent the GitHub App private key.
@@ -155,7 +155,7 @@ The dashboard can write or update `data/agents.env` after Runner Key creation.
 That file is local runtime state. It may contain a plaintext Runner Key. Do not
 share or commit it.
 
-The preview package also includes a placeholder `data/agents.env` so you can
+The self-hosted package also includes a placeholder `data/agents.env` so you can
 see where the Runner Key, GitHub Read Token, and test repo values belong. If
 you change `IGW_HOST_PORT`, the dashboard-generated `INTENT_GATEWAY_URL` uses
 that host port when it updates `data/agents.env`.
@@ -174,8 +174,8 @@ Provide these values by configuring the agent to read `data/agents.env`, by
 setting environment variables before starting the agent, or by using the agent
 tool's own secret/env configuration.
 
-The preview ZIP includes the story demo under `examples/self-hosted/`. Run it
-from the extracted preview folder after the Gateway, Runner Key, and GitHub Read
+The self-hosted ZIP includes the story demo under `examples/self-hosted/`. Run it
+from the extracted self-hosted folder after the Gateway, Runner Key, and GitHub Read
 Token are ready. If the required variables are not already set in the shell, the
 demo first tries to load `data/agents.env`:
 
@@ -208,8 +208,8 @@ docker compose --env-file .env -f docker-compose.yml up -d
 
 ## Local State
 
-In preview mode, the Gateway creates the local pepper on first start and reuses
-it on later starts:
+In the bundled Docker self-hosted configuration, the Gateway creates the local
+pepper on first start and reuses it on later starts:
 
 ```text
 data/intent_gateway_pepper
@@ -232,7 +232,7 @@ Deleting `data/` resets local Gateway state and invalidates existing Runner
 Keys. Do not share or commit files from `data/`, `.env`, GitHub App private
 keys, Runner Keys, logs, payloads, or raw responses.
 
-Older preview runs may have created `data/local-secrets.json`. New preview
+Older self-hosted runs may have created `data/local-secrets.json`. New self-hosted
 starts do not need it for Runner Key creation.
 
 ## Test Repository Template
@@ -241,17 +241,17 @@ Use `test-repo-template/` to create a small GitHub test repository before you
 connect a real project. Copy that folder into a new empty repository, commit and
 push it as the human owner, then install the GitHub App only on that test
 repository. Read `test-repo-template/docs/policy-explained.md` and
-`docs/public/githubrepo/07-policy-yaml.md` before changing the preview policy.
+`docs/public/githubrepo/07-policy-yaml.md` before changing the test policy.
 
-The preview test policy uses `mode: guarded`. `fast` and `strict` exist as
-advanced modes, but they are not the main preview setup flow.
+Self-hosted GitHub Gateway v1.3 test policy uses `mode: guarded`. `fast` and `strict` exist as
+advanced modes, but they are not the main self-hosted setup flow.
 
 The template policy lives at `.github/intent-gateway.yaml` and matches the
-preview demo paths.
+self-hosted demo paths.
 
 ## Demo Policy Paths
 
-Use demo and smoke writes that match the test repository policy. For the preview
+Use demo and smoke writes that match the test repository policy. For Self-hosted GitHub Gateway v1.3
 policy `config/*`, allowed writes should be direct files under `config/`, for
 example:
 
@@ -260,7 +260,7 @@ config/live-demo-pass-20260520T091206Z.yaml
 config/gateway-load-test-20260520T091206Z-001.yaml
 ```
 
-In this preview policy, `config/*` allows direct files under `config/`. It does
+In this test policy, `config/*` allows direct files under `config/`. It does
 not allow nested paths such as `config/demo/file.yaml`. Blocked examples should
 stay outside the allowed scope, for example `security/...` or `.github/...`.
 
@@ -269,7 +269,7 @@ stay outside the allowed scope, for example `security/...` or `.github/...`.
 Double-click:
 
 ```text
-Stop Intent Gateway.cmd
+Stop GitHub Gateway.cmd
 ```
 
 Or run manually:
@@ -285,7 +285,7 @@ Use the same env file for `down` that you used for `up`.
 Double-click:
 
 ```text
-Show Logs.cmd
+Show GitHub Gateway Logs.cmd
 ```
 
 Or run manually:

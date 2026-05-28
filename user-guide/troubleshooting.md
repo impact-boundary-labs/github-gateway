@@ -24,7 +24,7 @@ Detailed reference:
 
 - start Docker Desktop
 - wait until Docker is ready
-- start the preview again
+- start Self-hosted GitHub Gateway v1.3 again
 
 ## Port 18080 occupied
 
@@ -61,7 +61,7 @@ Detailed reference:
 
 - open the GitHub App installation page
 - choose **Only selected repositories**
-- install only on the correct preview test repository
+- install only on the correct test repository
 - wait a moment if GitHub is still propagating the install
 - use **Refresh now** in the dashboard
 
@@ -108,7 +108,7 @@ Detailed reference:
 
 **Likely cause**
 
-- the preview still holds old local manifest-created app files
+- Self-hosted GitHub Gateway v1.3 still holds old local manifest-created app files
 
 **Fix**
 
@@ -149,7 +149,7 @@ Detailed reference:
 **Fix**
 
 - use a fine-grained token
-- scope it only to the preview test repository
+- scope it only to the test repository
 - use read-only permissions:
   - Contents
   - Pull requests
@@ -196,7 +196,7 @@ The push must fail.
 
 **Likely cause**
 
-- the path is outside the allowed preview policy
+- the path is outside the allowed test policy
 
 **Fix**
 
@@ -248,5 +248,5 @@ config/demo/example.yaml
 - set `INTENT_GATEWAY_ALLOWED_REPOS` to the real test repository
 - set it in `.env`, not in `data/agents.env`
 - update `data/agents.env` so `TEST_REPO` matches that repository
-- restart the preview if you changed `.env`
+- restart Self-hosted GitHub Gateway v1.3 if you changed `.env`
 - use **Refresh now** and then run the demo again

@@ -1,6 +1,6 @@
 # Local Runner And Helpers
 
-GitHub Gateway includes local helpers for preview evaluation. They are
+GitHub Gateway includes local helpers for self-hosted evaluation. They are
 convenience tools, not trust boundaries.
 
 ## Helper Overview
@@ -60,7 +60,7 @@ Do not put private payloads or secrets in reusable example files.
 
 ## Runner Key Helpers
 
-Runner Keys can be created from the dashboard in the self-hosted preview.
+Runner Keys can be created from the dashboard in Self-hosted GitHub Gateway v1.3.
 
 Advanced/local helper options may include:
 

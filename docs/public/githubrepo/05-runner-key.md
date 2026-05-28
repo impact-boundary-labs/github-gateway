@@ -40,7 +40,7 @@ the request before repository impact.
 
 ## Creating A Runner Key
 
-In the self-hosted preview, create Runner Keys in the dashboard after:
+In Self-hosted GitHub Gateway v1.3, create Runner Keys in the dashboard after:
 
 1. GitHub App setup is complete.
 2. The GitHub App is installed on the selected test repository.
@@ -55,7 +55,7 @@ cannot be recovered from the Gateway state.
 
 ## Storing The Runner Key
 
-For local preview, use:
+For local self-hosted setup, use:
 
 ```text
 data/agents.env
@@ -132,8 +132,8 @@ If a Runner Key is leaked:
 4. Update the agent environment.
 5. Treat any submissions made with the leaked key as untrusted until reviewed.
 
-The exact revocation mechanism depends on the preview build and local state
-management. For a local technical preview, the conservative recovery path is to
+The exact revocation mechanism depends on the Self-hosted GitHub Gateway v1.3 build and local state
+management. For a local self-hosted deployment, the conservative recovery path is to
 create fresh local Gateway state for the demo environment if you cannot remove
 or invalidate the leaked key through the dashboard.
 

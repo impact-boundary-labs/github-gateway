@@ -99,7 +99,7 @@ This change supports the GitHub Gateway story demo for a config-only update.
 
 Proposed changes:
 - Create config/live-demo-pass.yaml.
-- Keep the change inside the preview policy allowed path.
+- Keep the change inside the test policy allowed path.
 
 Validation:
 - Branch head was read before submit.

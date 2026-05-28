@@ -1,7 +1,6 @@
 # Security Model
 
-This file explains the security model of the **GitHub Gateway Self-hosted
-preview** in plain language.
+This file explains the security model of **Self-hosted GitHub Gateway v1.3** in plain language.
 
 Detailed reference:
 
@@ -40,7 +39,7 @@ That is the core boundary.
 
 - Used by the Gateway.
 - Lets the Gateway create branches and pull requests.
-- Stored locally in the preview data/secrets path.
+- Stored locally in the self-hosted data or secrets path.
 - Never give this to the agent.
 - If the agent has this, the boundary is broken.
 

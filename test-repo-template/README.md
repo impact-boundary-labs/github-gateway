@@ -1,7 +1,7 @@
-# GitHub Gateway Preview Test Repository
+# Self-hosted GitHub Gateway v1.3 Test Repository
 
 This folder is a copyable test repository template for the self-hosted GitHub
-Gateway preview. Use it instead of connecting a real project repository first.
+Gateway v1.3 run. Use it instead of connecting a real project repository first.
 
 The Gateway reads repository policy from:
 
@@ -17,7 +17,7 @@ The Gateway reads repository policy from:
 4. Install the GitHub App only on this test repository.
 5. Create a Runner Key for this repository and branch.
 6. Give the agent only the Runner Key and a GitHub Read Token.
-7. Run the preview demo.
+7. Run the self-hosted demo.
 
 Do not give the agent GitHub write credentials, the GitHub App private key, SSH
 keys with write access, or Git Credential Manager write access.
@@ -40,7 +40,7 @@ Allowed demo paths:
 
 ```text
 config/live-demo-pass.yaml
-config/self-hosted-preview-demo.yaml
+config/self-hosted-gateway-demo.yaml
 config/gateway-load-test-20260520T091206Z-001.yaml
 ```
 
@@ -52,7 +52,7 @@ security/live-demo-blocked.yaml
 config/demo/file.yaml
 ```
 
-In this preview policy, `config/*` allows direct files under `config/`. It does
+In this test policy, `config/*` allows direct files under `config/`. It does
 not allow nested paths such as `config/demo/file.yaml`.
 
 Read [docs/policy-explained.md](docs/policy-explained.md) before running the

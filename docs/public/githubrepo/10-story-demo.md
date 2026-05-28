@@ -3,7 +3,7 @@
 The Story Demo is a screen-recording-friendly walkthrough of the GitHub
 Gateway Self-hosted 1.3 flow.
 
-Run it from the extracted preview folder:
+Run it from the extracted self-hosted folder:
 
 ```powershell
 python examples/self-hosted/github-gateway-story-demo.py
@@ -86,7 +86,7 @@ Blocked demo path:
 security/live-demo-blocked-<timestamp>.yaml
 ```
 
-The preview policy allows direct files under `config/` and blocks `security/*`.
+The test policy allows direct files under `config/` and blocks `security/*`.
 
 ## What It Should Not Print
 

@@ -3,14 +3,14 @@
 Agents submit structured JSON intents to GitHub Gateway. The Gateway validates
 the intent before any GitHub write impact is attempted.
 
-This reference covers the public preview intent shapes:
+This reference covers the Self-hosted GitHub Gateway v1.3 intent shapes:
 
 - `write`
 - `write_set`
 - `update_gateway_pr_write_set`
 
-All writes are full-file writes in this preview. There is no native patch parser
-in GitHub Gateway Self-hosted 1.3.
+All writes are full-file writes in Self-hosted GitHub Gateway v1.3. There is no native patch parser
+in Self-hosted GitHub Gateway v1.3.
 
 ## Common Top-Level Fields
 

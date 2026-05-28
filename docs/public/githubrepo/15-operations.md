@@ -1,25 +1,25 @@
 # Operations
 
-This is a public operations guide for GitHub Gateway Self-hosted 1.3. It avoids
-private operational details and focuses on safe preview operation.
+This is a public operations guide for Self-hosted GitHub Gateway v1.3. It avoids
+private operational details and focuses on safe self-hosted operation.
 
 ## Start
 
-Windows launcher: use the start launcher included in the preview folder.
+Windows launcher: use the start launcher included in the self-hosted folder.
 
 Manual start:
 
 ```powershell
-docker load -i intent-gateway-preview.tar
+docker load -i github-gateway-self-hosted.tar
 docker compose --env-file .env -f docker-compose.yml up -d
 ```
 
-The launcher should load the bundled preview image when the tar is present, then
+The launcher should load the bundled self-hosted image when the tar is present, then
 start Docker Compose.
 
 ## Stop
 
-Windows launcher: use the stop launcher included in the preview folder.
+Windows launcher: use the stop launcher included in the self-hosted folder.
 
 Manual stop:
 
@@ -29,7 +29,7 @@ docker compose --env-file .env -f docker-compose.yml down
 
 ## Logs
 
-Windows launcher: use the log launcher included in the preview folder.
+Windows launcher: use the log launcher included in the self-hosted folder.
 
 Manual logs:
 
@@ -74,7 +74,7 @@ Do not share or commit local state.
 
 ## Backups
 
-For preview evaluation, preserve local state only if you need continuity:
+For self-hosted evaluation, preserve local state only if you need continuity:
 
 - `data/state.db`
 - `data/intent_gateway_pepper`
@@ -85,12 +85,12 @@ If you do not need continuity, start from a fresh extracted folder.
 
 ## Updates
 
-For a new preview package:
+For a new self-hosted package:
 
 1. Stop the old Gateway.
-2. Extract the new preview ZIP into a new folder.
+2. Extract the new self-hosted ZIP into a new folder.
 3. Copy or recreate only the local state you intentionally want to keep.
-4. Start the new preview.
+4. Start the new self-hosted package.
 5. Use **Refresh now** in the dashboard.
 
 Do not copy old logs, raw responses, temporary payloads, or unrelated local
