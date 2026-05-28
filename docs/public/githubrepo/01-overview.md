@@ -35,7 +35,8 @@ It runs locally with Docker and provides:
 - scoped Runner Keys for agent-to-Gateway submit
 - policy file checks
 - state binding checks
-- content sanity checks
+- content sanity checks for executable headers, binary/text validity, and
+  parseable YAML/JSON where applicable
 - reviewable pull request creation
 - same-effect PR reuse
 - follow-up updates to the same locally known Gateway-created write-set PR

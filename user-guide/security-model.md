@@ -148,7 +148,13 @@ The Gateway can block things such as:
 - writes to `.github/*`
 - writes based on stale `read_blob_sha`
 - follow-ups against stale parent PR head
-- payloads that fail content sanity
+- payloads that fail implemented content sanity checks, such as executable
+  headers, binary/non-UTF-8 content in guarded modes, or invalid YAML/JSON for
+  those file types
+
+Content sanity is not semantic analysis and not a secret scanner. Keep secrets
+out of allowed paths through policy, agent instructions, review, and normal
+secret-handling controls.
 - requests outside the Runner Key repo/branch scope
 - invalid or malformed intents
 

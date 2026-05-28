@@ -24,11 +24,19 @@ Check these behaviors on a test repository:
 - agent environment can be checked for no direct `git push`
 - allowed config change can create a reviewable PR
 - blocked path creates no repository impact
-- content sanity block creates no repository impact
+- content sanity block for an implemented format check creates no repository
+  impact
 - stale read-state creates conflict before impact
 - same-effect request can reuse an existing Gateway PR
 - follow-up can update the same locally known Gateway-created write-set PR
 - dashboard Activity shows recognized structured Gateway decisions
+
+For content sanity validation, use a fixture that matches the implemented
+checks: executable `MZ`/ELF headers, binary or non-UTF-8 content in guarded
+modes, or invalid YAML/JSON for those file types. Do not treat synthetic
+key-like or token-like text in an otherwise valid allowed file as a content
+sanity scanner test. GitHub Gateway Self-hosted v1.3 does not include semantic
+analysis or a secret scanner.
 
 ## Story Demo Expected Outcomes
 

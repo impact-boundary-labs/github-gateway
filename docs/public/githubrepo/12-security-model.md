@@ -125,12 +125,19 @@ Depending on policy and request state, GitHub Gateway can block:
 - writes to `.github/*` after initial human policy setup
 - writes based on stale `read_blob_sha`
 - follow-ups against stale parent PR head
-- payloads that fail content sanity
+- payloads that fail implemented content sanity checks, such as executable
+  headers, binary/non-UTF-8 content in guarded modes, or invalid YAML/JSON for
+  those file types
 - malformed intents
 - requests outside configured allowlist
 
 Blocked and conflicted requests should create no branch, no commit, and no pull
 request.
+
+Content sanity is not a semantic review and not a secret scanner. A
+secret-looking string inside an otherwise valid allowed file is not a DLP
+guarantee failure by itself; keep secrets out through repository policy, agent
+instructions, review, and normal secret-handling controls.
 
 ## State Binding
 

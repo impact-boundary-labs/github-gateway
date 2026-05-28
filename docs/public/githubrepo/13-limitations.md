@@ -99,6 +99,21 @@ blocked_paths:
 
 `config/*` means direct files under `config/`, not nested paths.
 
+## Content Sanity Scope
+
+Content sanity is intentionally narrow. It blocks executable headers, binary or
+non-UTF-8 content in guarded modes, and invalid YAML/JSON for those file types.
+
+It is not:
+
+- a semantic correctness check
+- a secret scanner
+- a data loss prevention system
+- a guarantee that an allowed file contains no sensitive value
+
+Use repository policy, isolated agent credentials, human review, and normal
+secret-handling controls to keep secrets out of allowed paths.
+
 ## Agent Isolation
 
 The agent must not have GitHub write credentials.

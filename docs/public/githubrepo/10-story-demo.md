@@ -88,6 +88,12 @@ security/live-demo-blocked-<timestamp>.yaml
 
 The test policy allows direct files under `config/` and blocks `security/*`.
 
+The default story demo does not test semantic correctness or secret scanning.
+Content-sanity validation is a separate smoke check for implemented format
+failures such as executable headers, binary/non-UTF-8 content in guarded modes,
+or invalid YAML/JSON. A key-like string inside otherwise valid YAML is not a
+content-sanity scanner test.
+
 ## What It Should Not Print
 
 The story demo should not print:

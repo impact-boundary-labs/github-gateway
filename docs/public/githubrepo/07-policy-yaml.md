@@ -66,7 +66,8 @@ An intent still must pass:
 - path normalization
 - blocked path checks
 - state binding checks
-- content sanity checks
+- content sanity checks for executable headers, binary/text validity, and
+  parseable YAML/JSON where applicable
 - materialization verification
 
 Being in an allowed path does not mean a PR is automatically correct or should

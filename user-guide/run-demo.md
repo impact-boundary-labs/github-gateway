@@ -98,9 +98,13 @@ The intended cases are:
 
 - allowed write under `config/live-demo-pass.yaml`
 - blocked write under `security/live-demo-blocked.yaml`
-- `content_sanity` failure for an invalid payload under an allowed path
 - stale state conflict after the repository state changes
 - follow-up update on the same Gateway pull request
+
+Content-sanity validation is a separate smoke check, not part of the default
+story demo. Use an implemented format failure such as invalid YAML/JSON or
+executable/binary content. Synthetic key-like text in valid YAML is not a secret
+scanner test.
 
 ## 6. Expected Outcomes
 
