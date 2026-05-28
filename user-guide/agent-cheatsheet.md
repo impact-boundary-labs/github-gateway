@@ -52,7 +52,7 @@ Do not commit or share that file. It may contain a plaintext Runner Key.
 - read repository state from GitHub
 - submit `write` for one file
 - submit `write_set` for grouped multi-file changes
-- submit follow-up intent only for controlled updates to an existing Gateway PR
+- submit follow-up intent only for controlled updates to an existing locally known Gateway write-set PR
 - follow `required_next_action`
 
 ## Compact Intent Shapes
@@ -82,7 +82,7 @@ operation=update_gateway_pr_write_set
 - `Admitted`: review the pull request
 - `Blocked`: fix the request or policy issue first
 - `Conflict`: re-read GitHub state and rebuild the intent
-- `Follow-up`: continue on the same Gateway pull request when allowed
+- `Follow-up`: continue on the same Gateway write-set pull request when allowed
 
 ## Reminder
 

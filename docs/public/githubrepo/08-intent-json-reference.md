@@ -146,9 +146,13 @@ follow-up.
       "payload": "c2VydmljZTogZm9sbG93LXVwCg=="
     }
   ],
-  "agent_message": "Context:\nFollow up on the Gateway-created PR.\n\nProposed changes:\n- Update config/service.yaml.\n\nValidation:\n- Parent PR head was re-read before submit.\n\nSafety note:\nNo known sensitive areas."
+  "agent_message": "Context:\nFollow up on the Gateway-created write-set PR.\n\nProposed changes:\n- Update config/service.yaml.\n\nValidation:\n- Parent PR head was re-read before submit.\n\nSafety note:\nNo known sensitive areas."
 }
 ```
+
+`update_gateway_pr_write_set` requires a parent PR that was originally created
+by `write_set` and is still present in this local Gateway state. It is not the
+follow-up path for single-file `write` PRs.
 
 ## Valid Response Shape
 

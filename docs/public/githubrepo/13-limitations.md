@@ -78,7 +78,10 @@ It is not intended for:
 - arbitrary human-created PR updates
 - general Git hosting
 
-Follow-up support is intended for Gateway-created PRs.
+Follow-up support in 1.3 is intended for Gateway-created write-set PRs that are
+still known to the same local Gateway state. It is not a generic updater for
+single-file `write` PRs, arbitrary human-created PRs, or PRs whose local parent
+record is unavailable.
 
 ## Policy Scope
 

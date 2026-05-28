@@ -27,7 +27,7 @@ Check these behaviors on a test repository:
 - content sanity block creates no repository impact
 - stale read-state creates conflict before impact
 - same-effect request can reuse an existing Gateway PR
-- follow-up can update the same Gateway-created PR
+- follow-up can update the same locally known Gateway-created write-set PR
 - dashboard Activity shows recognized structured Gateway decisions
 
 ## Story Demo Expected Outcomes
@@ -39,7 +39,7 @@ The story demo should produce these public-safe outcomes:
 | blocked policy path | Blocked | no branch, no commit, no PR |
 | allowed config change | Admitted | reviewable PR |
 | same effect | Reused | existing Gateway PR reused |
-| follow-up | Admitted | same Gateway PR updated |
+| follow-up | Admitted | same Gateway write-set PR updated |
 | stale parent PR head | Conflict | no new impact |
 
 The dashboard Activity log should show sanitized rows for these decisions.

@@ -38,7 +38,7 @@ It runs locally with Docker and provides:
 - content sanity checks
 - reviewable pull request creation
 - same-effect PR reuse
-- follow-up updates to the same Gateway-created PR
+- follow-up updates to the same locally known Gateway-created write-set PR
 - sanitized Dashboard Activity rows
 - compact Guard Result PR bodies
 - story demo for the expected self-hosted flow
@@ -73,7 +73,7 @@ state against GitHub before writing.
 | --- | --- | --- |
 | Admitted | The intent passed Gateway checks. | A reviewable PR is created or updated. |
 | Reused | Equivalent admitted work already exists. | Existing Gateway PR is reused. |
-| Follow-up | A validated update targets an existing Gateway PR. | Same PR is updated. |
+| Follow-up | A validated update targets an existing locally known Gateway write-set PR. | Same PR is updated. |
 | Blocked | Policy, scope, content, or request checks failed. | No branch, commit, or PR. |
 | Conflict | Declared state was stale or could not be trusted. | No new impact. |
 | Verification required | The Gateway could not safely verify final state. | Operator attention required. |

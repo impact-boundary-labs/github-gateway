@@ -250,7 +250,7 @@ Expected story:
 1. Bad intent against `security/*` is blocked.
 2. Good intent against `config/*` creates a reviewable PR.
 3. Equivalent intent reuses the existing Gateway PR.
-4. Follow-up updates the same Gateway PR.
+4. Follow-up updates the same locally known Gateway write-set PR.
 5. Stale parent head is rejected as a conflict.
 
 After the demo, open the dashboard and check the Activity log. It should show

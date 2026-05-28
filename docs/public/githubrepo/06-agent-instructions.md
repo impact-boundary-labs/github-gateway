@@ -153,7 +153,8 @@ Do not include per-item `operation` fields inside `changes[]`.
 ## Intent Type: update_gateway_pr_write_set
 
 Use `operation: "update_gateway_pr_write_set"` only for a controlled follow-up
-on an existing Gateway-created PR.
+on an existing Gateway-created `write_set` PR that is still known to this local
+Gateway state. Do not use it for single-file `write` PRs.
 
 The agent must re-read the parent PR and use the current PR head as
 `expected_parent_head_commit`.

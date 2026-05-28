@@ -92,5 +92,7 @@ Gateway returns a conflict and requires a fresh repository read.
 
 Follow-up on the same PR:
 The agent reads the current Gateway PR head and submits
-`update_gateway_pr_write_set`. Gateway updates the existing Gateway-created PR
-when parent PR ownership, parent head, policy, and read-state checks pass.
+`update_gateway_pr_write_set`. Gateway updates the existing Gateway-created
+write-set PR when the local parent record, parent PR ownership, parent head,
+policy, and read-state checks pass. This is not the follow-up path for
+single-file `write` PRs.
