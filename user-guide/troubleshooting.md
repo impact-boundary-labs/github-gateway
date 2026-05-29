@@ -26,11 +26,33 @@ Detailed reference:
 - wait until Docker is ready
 - start Self-hosted GitHub Gateway v1.3 again
 
+On macOS/Linux, use `./scripts/start-gateway.sh` from the extracted self-hosted
+folder after running `chmod +x scripts/*.sh` if needed.
+
+## Healthz Is Unhealthy Before Setup
+
+**Symptom**
+
+- `/livez` responds
+- `/healthz` reports unhealthy before GitHub App setup is complete
+
+**Likely cause**
+
+- the HTTP server is running, but readiness dependencies are not fully
+  configured yet
+
+**Fix**
+
+- continue setup in the dashboard
+- create or configure the GitHub App
+- use **Refresh now** after GitHub installation changes
+- expect `/healthz` to become healthy after setup is complete
+
 ## Port 18080 occupied
 
 **Symptom**
 
-- `http://localhost:18080/dashboard` does not open
+- `http://127.0.0.1:18080/dashboard` does not open
 - compose reports a bind error
 
 **Likely cause**

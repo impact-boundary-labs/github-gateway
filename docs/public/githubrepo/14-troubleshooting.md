@@ -68,6 +68,9 @@ Fix:
 3. Confirm the Gateway can read the private key.
 4. Use **Refresh now**.
 
+Before GitHub App setup is complete, `/healthz` may report unhealthy. This is
+expected.
+
 ## PEM Path Issues
 
 Symptom:
@@ -192,9 +195,13 @@ Fix:
 
 Use a clean agent environment without GitHub write credentials.
 
+The Gateway cannot remove unrelated credentials from your machine. For the
+isolation proof, run the agent environment without ambient GitHub write
+credentials.
+
 Check:
 
-```powershell
+```sh
 git -c credential.helper= push --dry-run origin HEAD:refs/heads/ggw-readonly-push-test
 ```
 
@@ -203,6 +210,10 @@ Expected:
 ```text
 The push must fail.
 ```
+
+If there is no local clone of the test repository, skip this push-isolation
+check. That is not a story demo failure; it only means the isolation proof has
+not been performed from that environment.
 
 ## config/* Nested Path Mistake
 

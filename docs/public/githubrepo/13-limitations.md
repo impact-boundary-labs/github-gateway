@@ -127,6 +127,11 @@ git -c credential.helper= push --dry-run origin HEAD:refs/heads/ggw-readonly-pus
 The Runner Key does not grant GitHub write access. A successful push means some
 other credential is present in the environment.
 
+The Gateway cannot remove unrelated credentials from your machine. For the
+isolation proof, run the agent environment without ambient GitHub write
+credentials. If no local clone of the test repository exists, skip the
+push-isolation check; the story demo can still be a valid functional test.
+
 ## Data And Telemetry
 
 Self-hosted Gateway runtime state stays local to the user's environment.

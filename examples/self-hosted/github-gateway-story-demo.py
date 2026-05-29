@@ -204,7 +204,11 @@ def validate_local_allowlist() -> None:
 def preflight_policy(owner: str, repo: str, base_head: str) -> None:
     policy_text = gw.get_policy_content_at_ref(owner, repo, base_head)
     if policy_text is None:
-        raise DemoFailure(f"{TARGET_BRANCH} has no {gw.POLICY_PATH}; story demo needs guarded policy metadata")
+        raise DemoFailure(
+            f"{TARGET_BRANCH} has no {gw.POLICY_PATH}. Commit the bundled "
+            "test-repo-template/.github/intent-gateway.yaml to the target repo first. "
+            "You can check this with: python examples/self-hosted/check-test-repo.py"
+        )
     policy = gw.parse_repo_policy(policy_text)
     good_allowed = gw.repo_policy_allows_path(policy, DEMO_FILE_PATH)
     blocked_allowed = gw.repo_policy_allows_path(policy, BLOCKED_FILE_PATH)

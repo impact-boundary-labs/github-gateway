@@ -140,7 +140,33 @@ may have cached write credentials. That does not come from the Runner Key.
 For a clean Gateway demo, run the agent in an environment without ambient
 GitHub write credentials.
 
-## G. What The Gateway Blocks
+The Gateway cannot remove unrelated credentials from your machine. For the
+isolation proof, run the agent environment without ambient GitHub write
+credentials.
+
+If no local clone of the test repository exists, skip the push-isolation check.
+That does not make the story demo fail; it means this specific isolation proof
+was not performed.
+
+## G. Functional Test vs Isolation Proof
+
+The functional test checks whether GitHub Gateway handles the controlled story
+demo outcomes:
+
+- Blocked
+- Admitted
+- Reused
+- Follow-up
+- Conflict
+
+This can run even when the human operator's normal shell still has GitHub write
+access, because the demo submits intents to the Gateway.
+
+The isolation proof checks whether the agent environment lacks ambient GitHub
+write credentials. The expected result is that read-only GitHub access works,
+but direct write attempts fail.
+
+## H. What The Gateway Blocks
 
 The Gateway can block things such as:
 
@@ -151,14 +177,14 @@ The Gateway can block things such as:
 - payloads that fail implemented content sanity checks, such as executable
   headers, binary/non-UTF-8 content in guarded modes, or invalid YAML/JSON for
   those file types
+- requests outside the Runner Key repo/branch scope
+- invalid or malformed intents
 
 Content sanity is not semantic analysis and not a secret scanner. Keep secrets
 out of allowed paths through policy, agent instructions, review, and normal
 secret-handling controls.
-- requests outside the Runner Key repo/branch scope
-- invalid or malformed intents
 
-## H. What The Gateway Does Not Prove
+## I. What The Gateway Does Not Prove
 
 - It does not prove semantic correctness.
 - It does not review code quality.
@@ -166,8 +192,9 @@ secret-handling controls.
 - It does not replace human review.
 - It does not prove the agent "understood" the file.
 - It controls repository impact, not truth.
+- Admitted means reviewable pull request, not safe to merge.
 
-## I. Expected Outcomes
+## J. Expected Outcomes
 
 ### Admitted
 

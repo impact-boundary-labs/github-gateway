@@ -38,10 +38,21 @@ access for the agent**.
 The local dashboard runs at:
 
 ```text
-http://localhost:18080/dashboard
+http://127.0.0.1:18080/dashboard
 ```
 
 If port `18080` is busy, edit `.env` and change `IGW_HOST_PORT`.
+
+On Windows, start with `Start GitHub Gateway.cmd`. On macOS/Linux, run:
+
+```sh
+chmod +x scripts/*.sh
+./scripts/start-gateway.sh
+```
+
+The ZIP is built on Windows, so macOS/Linux may need `chmod +x` after
+extraction. The current bundled image is `linux/amd64`; Docker Desktop on Apple
+Silicon may run it via emulation.
 
 ## Recommended First Run
 

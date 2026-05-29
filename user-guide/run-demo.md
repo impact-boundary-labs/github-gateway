@@ -69,6 +69,10 @@ The agent needs:
 
 The agent must have **no direct GitHub write access**.
 
+The story demo is a functional test. It checks Gateway decisions by submitting
+intents to the Gateway. It is not by itself proof that the agent environment is
+isolated from every unrelated GitHub write credential on the machine.
+
 If the shell is not already configured, the story demo first looks for:
 
 ```text
@@ -80,7 +84,19 @@ match `INTENT_GATEWAY_ALLOWED_REPOS` in `.env`. If you changed
 `IGW_HOST_PORT`, the generated `INTENT_GATEWAY_URL` should use the same host
 port.
 
-## 4. Run The Story Demo
+## 4. Check The Test Repo
+
+Before the Story Demo writes anything, check that the GitHub test repo was
+created from the bundled template and contains the policy file:
+
+```powershell
+python examples/self-hosted/check-test-repo.py
+```
+
+This check reads GitHub with `GITHUB_READ_TOKEN`. It does not submit a Gateway
+intent and does not create a branch, commit, or pull request.
+
+## 5. Run The Story Demo
 
 From the extracted self-hosted folder:
 
@@ -92,7 +108,7 @@ The demo prints the target repo and branch before it starts. If `TEST_REPO`
 does not match the configured Gateway allowlist, it stops early with a local
 error instead of sending a confusing blocked request.
 
-## 5. What The Demo Should Show
+## 6. What The Demo Should Show
 
 The intended cases are:
 
@@ -106,7 +122,7 @@ story demo. Use an implemented format failure such as invalid YAML/JSON or
 executable/binary content. Synthetic key-like text in valid YAML is not a secret
 scanner test.
 
-## 6. Expected Outcomes
+## 7. Expected Outcomes
 
 - **Admitted**: a reviewable pull request is created
 - **Blocked**: no repository impact
@@ -115,3 +131,7 @@ scanner test.
 
 Watch the dashboard activity feed while the demo runs. It should show sanitized
 decision data, not raw payloads or secrets.
+
+For the isolation proof, run the agent environment without ambient GitHub write
+credentials. If you do not have a local clone of the test repository, skip the
+push-isolation check and do not treat that as a story demo failure.

@@ -105,7 +105,7 @@ try {
 }
 
 $port = Read-HostPort $EnvFile
-$dashboardURL = "http://localhost:$port/dashboard"
+$dashboardURL = "http://127.0.0.1:$port/dashboard"
 Write-Host ""
 Write-Host "Self-hosted GitHub Gateway v1.3 is starting."
 Write-Host "Dashboard: $dashboardURL"

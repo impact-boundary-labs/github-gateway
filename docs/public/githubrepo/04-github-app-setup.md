@@ -85,7 +85,7 @@ Use a local dashboard URL for homepage, callback, or setup fields if your
 self-hosted setup asks for them:
 
 ```text
-http://localhost:18080/dashboard
+http://127.0.0.1:18080/dashboard
 ```
 
 Do not enable webhooks unless your specific self-hosted package explicitly requires

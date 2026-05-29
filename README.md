@@ -15,6 +15,9 @@ repository-root Compose files are for development or source-build workflows.
 
 No secrets are included in the ZIP.
 
+License: this self-hosted GitHub Gateway 1.3 preview is licensed under
+Apache-2.0. See `LICENSE` in the extracted package.
+
 ## Start Here
 
 Quick path:
@@ -49,7 +52,7 @@ Detailed reference:
 - Test repository policy explanation:
   `test-repo-template/docs/policy-explained.md`
 
-## Start On Windows
+## Quickstart Windows
 
 1. Install and start Docker Desktop.
 2. Unzip the self-hosted folder.
@@ -63,15 +66,77 @@ The launcher loads the bundled `github-gateway-self-hosted.tar` when it is prese
 starts Docker Compose, and opens:
 
 ```text
-http://localhost:18080/dashboard
+http://127.0.0.1:18080/dashboard
 ```
 
 The first dashboard visit opens **Getting started** in light mode by default.
 If you later switch theme, the dashboard keeps that browser preference locally.
 
+## Quickstart macOS/Linux
+
+1. Install and start Docker Desktop or Docker Engine with Docker Compose.
+2. Unzip the self-hosted folder.
+3. From the extracted folder, run:
+
+```sh
+chmod +x scripts/*.sh
+./scripts/start-gateway.sh
+```
+
+The shell launcher creates `.env` from `.env.example` when needed, creates
+`data/` and `secrets/`, loads `github-gateway-self-hosted.tar`, starts Docker
+Compose, and prints the dashboard URL.
+
+Stop without deleting local state:
+
+```sh
+./scripts/stop-gateway.sh
+```
+
+Show logs:
+
+```sh
+./scripts/show-logs.sh
+```
+
+The ZIP is built on Windows, so macOS/Linux may require the `chmod +x` command
+above after extraction.
+
+Current bundled image is `linux/amd64`. Docker Desktop on Apple Silicon may run
+it via emulation. Native `linux/arm64` image support is future packaging work
+unless multi-arch is implemented later.
+
+## Start, Stop, Logs
+
+Use the platform launcher for normal starts:
+
+- Windows: `Start GitHub Gateway.cmd`
+- macOS/Linux: `./scripts/start-gateway.sh`
+
+Stop keeps local state, Runner Keys, GitHub App files, and data folders:
+
+- Windows: `Stop GitHub Gateway.cmd`
+- macOS/Linux: `./scripts/stop-gateway.sh`
+
+Logs:
+
+- Windows: `Show GitHub Gateway Logs.cmd`
+- macOS/Linux: `./scripts/show-logs.sh`
+
 Some runtime files and environment variables still use the `intent-gateway` /
 `INTENT_GATEWAY_*` prefix for runtime compatibility. The public product name is
 GitHub Gateway by Impact Boundary Labs.
+
+## Next Steps
+
+After the dashboard opens:
+
+1. set `INTENT_GATEWAY_ALLOWED_REPOS` in `.env`
+2. create or configure the GitHub App in the dashboard
+3. install the GitHub App only on the test repository
+4. create a Runner Key
+5. create a fine-grained GitHub Read Token for the agent
+6. run the test repo check and story demo
 
 Before you run the demo, edit `.env` in the extracted self-hosted folder
 and set:
@@ -131,7 +196,7 @@ docker compose --env-file .env -f docker-compose.yml up -d
 Open the local dashboard:
 
 ```text
-http://localhost:18080/dashboard
+http://127.0.0.1:18080/dashboard
 ```
 
 After creating a Runner Key, give the agent Self-hosted GitHub Gateway v1.3 instructions from
@@ -174,12 +239,30 @@ Provide these values by configuring the agent to read `data/agents.env`, by
 setting environment variables before starting the agent, or by using the agent
 tool's own secret/env configuration.
 
+## Functional Test vs Isolation Proof
+
+The story demo is the functional test. It checks that the Gateway can decide the
+controlled cases: Blocked, Admitted, Reused, Follow-up, and Conflict. That test
+can still run even if the human operator's normal shell has GitHub write access,
+because the demo submits intents to the Gateway.
+
+The isolation proof is separate. It checks that the agent environment has no
+ambient GitHub write credentials. A write attempt with the read-only setup should
+fail, while read-only GitHub access should still work. The Gateway cannot remove
+unrelated credentials from your machine. For the isolation proof, run the agent
+environment without ambient GitHub write credentials.
+
+If you do not have a local clone of the test repository, skip the push-isolation
+check. That is not a story demo failure. The functional test remains valid, but
+the isolation proof has not been performed in that environment.
+
 The self-hosted ZIP includes the story demo under `examples/self-hosted/`. Run it
 from the extracted self-hosted folder after the Gateway, Runner Key, and GitHub Read
 Token are ready. If the required variables are not already set in the shell, the
 demo first tries to load `data/agents.env`:
 
 ```powershell
+python examples/self-hosted/check-test-repo.py
 python examples/self-hosted/github-gateway-story-demo.py
 ```
 
@@ -205,6 +288,19 @@ Then start again with the same env file:
 ```powershell
 docker compose --env-file .env -f docker-compose.yml up -d
 ```
+
+Health endpoints:
+
+```text
+/livez
+/healthz
+```
+
+`/livez` is basic HTTP liveness. `/healthz` is readiness and may report
+unhealthy before GitHub App setup is complete.
+
+Before GitHub App setup is complete, `/healthz` may report unhealthy. This is
+expected.
 
 ## Local State
 

@@ -72,12 +72,28 @@ submitting changes.
 
 ## 3. Start The Gateway
 
-On Windows, use the start helper included in the self-hosted folder.
+Windows:
 
-Or run from the extracted self-hosted folder:
+```text
+Start GitHub Gateway.cmd
+```
 
-```powershell
-docker load -i .\github-gateway-self-hosted.tar
+macOS/Linux:
+
+```sh
+chmod +x scripts/*.sh
+./scripts/start-gateway.sh
+```
+
+The ZIP is built on Windows, so macOS/Linux may need `chmod +x` after
+extraction. The current bundled image is `linux/amd64`; Docker Desktop on Apple
+Silicon may run it via emulation. Native `linux/arm64` image support is future
+packaging work unless multi-arch is implemented later.
+
+Manual fallback:
+
+```sh
+docker load -i github-gateway-self-hosted.tar
 docker compose --env-file .env -f docker-compose.yml up -d
 ```
 
@@ -97,8 +113,9 @@ http://127.0.0.1:18080/livez
 http://127.0.0.1:18080/healthz
 ```
 
-`/livez` checks that the HTTP server is alive. `/healthz` may report not ready
-until GitHub App setup is complete.
+`/livez` checks that the HTTP server is alive. `/healthz` is readiness. Before
+GitHub App setup is complete, `/healthz` may report unhealthy. This is
+expected.
 
 ## 4. Create Or Configure The GitHub App
 
@@ -197,11 +214,27 @@ GITHUB_READ_TOKEN=<github-read-token>
 Do not paste the GitHub Read Token into the dashboard. The Gateway does not need
 this token.
 
-## 8. Check Agent Write Isolation
+## 8. Functional Test vs Isolation Proof
 
-Open PowerShell in a local clone of the test repository and run:
+The story demo is the functional test. It checks that GitHub Gateway can decide
+the controlled outcomes: Blocked, Admitted, Reused, Follow-up, and Conflict.
+This test can still run if the human operator's normal shell has GitHub write
+access, because the demo submits intents to the Gateway.
 
-```powershell
+The isolation proof is separate. It checks that the agent environment has no
+ambient GitHub write credentials. The Gateway cannot remove unrelated
+credentials from your machine. For the isolation proof, run the agent environment
+without ambient GitHub write credentials.
+
+If there is no local clone of the test repository, skip the push-isolation check.
+Do not treat that as a story demo failure. The functional test remains valid,
+but the isolation proof has not been performed in that environment.
+
+## 9. Check Agent Write Isolation
+
+Open a shell in a local clone of the test repository and run:
+
+```sh
 git -c credential.helper= push --dry-run origin HEAD:refs/heads/igw-readonly-push-test
 ```
 
@@ -215,7 +248,7 @@ If the push succeeds, the agent environment still has ambient GitHub write
 credentials. That write access does not come from the Runner Key. Remove stored
 write credentials before using the environment as an isolated agent demo.
 
-## 9. Use The Test Repo Template
+## 10. Use The Test Repo Template
 
 Self-hosted GitHub Gateway v1.3 includes a test repo template under:
 
@@ -234,16 +267,19 @@ Use it to prepare a repository with:
 The policy file is created by the human owner initially. Later Gateway/agent
 writes to `.github/*` should be blocked by policy.
 
-## 10. Run The Story Demo
+## 11. Run The Story Demo
 
 From the extracted self-hosted folder:
 
 ```powershell
+python examples/self-hosted/check-test-repo.py
 python examples/self-hosted/github-gateway-story-demo.py
 ```
 
-The demo loads `data/agents.env` if required variables are not already set in
-the shell.
+The check reads GitHub to confirm the target repository was created from the
+bundled template and contains `.github/intent-gateway.yaml`. It creates no
+branch, commit, or pull request. The demo loads `data/agents.env` if required
+variables are not already set in the shell.
 
 Expected story:
 
@@ -268,15 +304,24 @@ completed, and Conflict.
 | Runner Key missing | No local Runner Key exists. | Create one in the dashboard. |
 | GitHub Read Token returns 401/403/404 | Token missing, wrong owner, wrong repo, or insufficient permissions. | Regenerate a fine-grained read-only token scoped to the test repo. |
 | Demo blocks with repo allowlist | `TEST_REPO` does not match `INTENT_GATEWAY_ALLOWED_REPOS`. | Fix `.env`, restart Gateway, and update `data/agents.env`. |
+| No local clone for push-isolation check | The test repo exists on GitHub but is not cloned locally. | Skip the isolation proof or clone the test repo; this is not a story demo failure. |
 | No PR created | Intent was blocked or conflicted. | Check the dashboard Activity log and follow `required_next_action`. |
 
 ## Stop The Gateway
 
-Use the stop helper included in the self-hosted folder.
+Use the platform stop helper included in the self-hosted folder:
+
+- Windows: `Stop GitHub Gateway.cmd`
+- macOS/Linux: `./scripts/stop-gateway.sh`
+
+Show logs:
+
+- Windows: `Show GitHub Gateway Logs.cmd`
+- macOS/Linux: `./scripts/show-logs.sh`
 
 Or:
 
-```powershell
+```sh
 docker compose --env-file .env -f docker-compose.yml down
 ```
 

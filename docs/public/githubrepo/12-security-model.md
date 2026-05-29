@@ -115,6 +115,30 @@ The push must fail.
 
 If it succeeds, the demo is not isolated.
 
+The Gateway cannot remove unrelated credentials from your machine. For the
+isolation proof, run the agent environment without ambient GitHub write
+credentials.
+
+If no local clone of the test repository exists, skip the push-isolation check.
+That is not a story demo failure. It only means this specific isolation proof was
+not performed in that environment.
+
+## Functional Test vs Isolation Proof
+
+The functional test checks Gateway behavior:
+
+- Blocked
+- Admitted
+- Reused
+- Follow-up
+- Conflict
+
+It can run even when the human operator's usual shell still has GitHub write
+access, because the story demo submits intents to the Gateway.
+
+The isolation proof checks the agent environment. Read-only GitHub access should
+work, but a direct write attempt should fail.
+
 ## What The Gateway Blocks
 
 Depending on policy and request state, GitHub Gateway can block:
@@ -193,6 +217,9 @@ GitHub Gateway does not prove:
 
 It reduces the need to trust every agent with write credentials. It does not
 remove the need to trust and operate the Gateway itself.
+
+Admitted means a reviewable pull request was created or updated. It does not
+mean the change is correct, tested, or safe to merge.
 
 ## Security Checklist
 

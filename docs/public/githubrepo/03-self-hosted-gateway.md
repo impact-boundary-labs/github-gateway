@@ -8,6 +8,9 @@ identity, local state, Runner Keys, and dashboard. The agent receives a scoped
 Runner Key for submitting intents and uses read-only repository state from
 GitHub, a local checkout, or helper tooling.
 
+This self-hosted GitHub Gateway 1.3 preview is licensed under Apache-2.0. The
+source-free package includes the `LICENSE` file.
+
 ## What Stays Local
 
 In Self-hosted GitHub Gateway v1.3:
@@ -37,6 +40,7 @@ docker-compose.yml
 .env
 README.md
 Windows start/stop/log launchers
+macOS/Linux start/stop/log launchers
 scripts/
 data/
 secrets/
@@ -49,6 +53,10 @@ examples/self-hosted/
 The package must not include source directories, `.git`, real `.env` files,
 state databases, real PEM files, Runner Keys, GitHub tokens, logs, payloads,
 raw responses, or private data.
+
+The current bundled image is `linux/amd64`. Docker Desktop on Apple Silicon may
+run it via emulation. Native `linux/arm64` image support is future packaging
+work unless multi-arch is implemented later.
 
 ## GitHub App Setup
 
@@ -100,7 +108,7 @@ The Gateway validates claimed repository state against GitHub before writing.
 Default dashboard URL:
 
 ```text
-http://localhost:18080/dashboard
+http://127.0.0.1:18080/dashboard
 ```
 
 Default allowlist placeholder:

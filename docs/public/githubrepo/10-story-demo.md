@@ -27,6 +27,27 @@ TEST_BRANCH=TARGET_BRANCH
 file. If the Gateway is running on a custom host port, `INTENT_GATEWAY_URL` must
 use that port.
 
+## Check The Test Repository
+
+The local `test-repo-template/` folder is a template. The Story Demo validates
+the actual GitHub target repository and branch, so that template content must be
+committed to the GitHub test repo first.
+
+Run:
+
+```powershell
+python examples/self-hosted/check-test-repo.py
+```
+
+The check confirms that:
+
+- `TEST_REPO` matches the local Gateway allowlist when it can be detected.
+- `GITHUB_READ_TOKEN` can read the target branch.
+- `.github/intent-gateway.yaml` exists in the GitHub target repo.
+- the policy allows direct `config/*` files and blocks `security/*`.
+
+The check does not submit an intent and creates no repository impact.
+
 ## What It Demonstrates
 
 The intended cases are:

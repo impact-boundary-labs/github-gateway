@@ -17,6 +17,7 @@ You should see at least:
 docker-compose.yml
 .env
 Start GitHub Gateway.cmd
+scripts/
 docs/
 user-guide/
 test-repo-template/
@@ -24,15 +25,31 @@ test-repo-template/
 
 ## 2. Start The Gateway
 
-On Windows, double-click:
+### Windows
+
+Double-click:
 
 ```text
 Start GitHub Gateway.cmd
 ```
 
-Or run manually:
+### macOS/Linux
 
-```powershell
+From the extracted folder, run:
+
+```sh
+chmod +x scripts/*.sh
+./scripts/start-gateway.sh
+```
+
+The ZIP is built on Windows, so macOS/Linux may need `chmod +x` after
+extraction. Current bundled image is `linux/amd64`. Docker Desktop on Apple
+Silicon may run it via emulation. Native arm64 image is future packaging work
+unless multi-arch is implemented later.
+
+### Manual fallback
+
+```sh
 docker load -i github-gateway-self-hosted.tar
 docker compose --env-file .env -f docker-compose.yml up -d
 ```
@@ -40,10 +57,30 @@ docker compose --env-file .env -f docker-compose.yml up -d
 Then open:
 
 ```text
-http://localhost:18080/dashboard
+http://127.0.0.1:18080/dashboard
 ```
 
 The first visit opens **Getting started** in light mode by default.
+
+Useful health endpoints:
+
+```text
+/livez
+/healthz
+```
+
+`/livez` means the server process is alive. `/healthz` is readiness. Before
+GitHub App setup is complete, `/healthz` may report unhealthy. This is expected.
+
+Stop without deleting local state:
+
+- Windows: `Stop GitHub Gateway.cmd`
+- macOS/Linux: `./scripts/stop-gateway.sh`
+
+Show logs:
+
+- Windows: `Show GitHub Gateway Logs.cmd`
+- macOS/Linux: `./scripts/show-logs.sh`
 
 Some runtime files and environment variables still use the `intent-gateway` /
 `INTENT_GATEWAY_*` prefix for runtime compatibility. The public product name is
@@ -153,3 +190,17 @@ Before that, read:
 
 That is the shortest explanation of why these three credentials are kept
 separate.
+
+## 8. Functional Test vs Isolation Proof
+
+The story demo is the functional test. It checks Gateway decisions such as
+Blocked, Admitted, Reused, Follow-up, and Conflict.
+
+The isolation proof is separate. It checks that the agent environment has no
+ambient GitHub write credentials. The Gateway cannot remove unrelated
+credentials from your machine. For the isolation proof, run the agent environment
+without ambient GitHub write credentials.
+
+If you do not have a local clone of the test repository, skip the
+push-isolation check. That is not a demo failure; it only means the isolation
+proof was not performed from that environment.
